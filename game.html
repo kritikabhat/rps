@@ -4,12 +4,33 @@
         <meta name="author" content="Me">
         <meta name="description" content="Game game game">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="script.js">
+        <link rel="stylesheet" href="styles.css">
         <title>Game Boring</title>
     </head>
     <body>
-        <script>
-            
-        </script>
+        <h1 id="myHeading">Rock, Paper, Scissors</h1>
+        <div class="intro">
+            <h2>Ready? Select an option below to play!</h2>
+            <h3>We will play 5 rounds to pick the winner.</h3>
+        </div>    
+        <div class="buttons">
+            <button class="btn" id="rockBtn">
+                <div class="icon">✊ Rock</div>
+            </button>
+            <button class="btn" id="paperBtn">
+                <div class="icon">✋ Paper</div>
+            </button>
+            <button class="btn" id="scissorsBtn">
+                <div class="icon">✌️ Scissors</div>
+            </button>
+        </div>
+        <div class="tally">
+            <div id="userTally">Player: </div>
+            <div id="computerTally">Computer: </div>
+        </div>
+        <div>
+            <div id="finalTally">Result: </div>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>

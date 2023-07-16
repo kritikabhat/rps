@@ -1,0 +1,60 @@
+body {
+    background-color: whitesmoke;
+    color: black;
+}
+
+#myHeading {
+    color: black;
+    font-family:serif 'Courier New', Courier, monospace;
+    border-bottom: 3px solid;
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+}
+
+.intro {
+    font-family:serif 'Courier New', Courier, monospace;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn {
+    border-radius: 8px;
+    border-color: black;
+    width: 170px;
+    height: 70px;
+    margin-top: 10px;
+}
+
+.icon {
+    font-size: 30px;
+}
+
+.tally {
+    display: flex;
+    font-size: 30px;
+    margin-top: 70px;
+    margin-left: 25%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+#finalTally {
+    display: none;
+    margin-left: 25%;
+    font-size: 30px;
+    margin-top: 20px;
+}
