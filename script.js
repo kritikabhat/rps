@@ -1,6 +1,7 @@
 const rockBtn = document.getElementById('rockBtn')
 const paperBtn = document.getElementById('paperBtn')
 const scissorsBtn = document.getElementById('scissorsBtn')
+
 const userTally = document.getElementById('userTally')
 const computerTally = document.getElementById('computerTally')
 const finalTally = document.getElementById('finalTally') // finalTally.hidden = true initally. I have set display= none 
@@ -9,6 +10,7 @@ let scoreUser = 0
 let scoreComputer = 0
 let finalWinner = ""
 let computerChoice = ""
+let numberOfPlays = 0
 
 function randomChoice () {
     let choices = ["Rock", "Paper", "Scissors"]
@@ -66,35 +68,35 @@ function playRound (userChoice, computerChoice) {
     return result
 }
 
+rockBtn.addEventListener('click', () => startPlayOnClick('rock'))
+paperBtn.addEventListener('click', () => startPlayOnClick('paper'))
+scissorsBtn.addEventListener('click', () => startPlayOnClick('scissors'))
+
 function startPlayOnClick (userChoice) {
     computerChoice = randomChoice()
-    let result = playRound(userChoice, computerChoice)
-    updateScoreTally(result)
+    let thisWinner = playRound(userChoice, computerChoice)
+    updateScoreTally(thisWinner)
 }
 
-function updateScoreTally (result) {
-    if (result === "You Lose!") {
+function updateScoreTally (thisWinner) {
+    numberOfPlays++;
+    if (thisWinner === "You Lose!") {
         ++scoreComputer
-        computerTally.textContent = `Player: ${scoreComputer}`
-    } else if(result === "You Win!") {
+        computerTally.textContent = `Computer: ${scoreComputer}`
+    } else if(thisWinner === "You Win!") {
         ++scoreUser
-        userTally.textContent = `Computer: ${scoreUser}`
+        userTally.textContent = `Player: ${scoreUser}`
     }
+    if (numberOfPlays === 5) declareWinner()
 }
 
-function startGame () {
-    for (let i = 0; i < 5; i++) {
-        rockBtn.addEventListener('click', startPlayOnClick('rock'))
-        paperBtn.addEventListener('click', startPlayOnClick('paper'))
-        scissorsBtn.addEventListener('click', startPlayOnClick('scissors'))
-    }
-
+function declareWinner() {
     if (scoreComputer > scoreUser) finalWinner= "Computer Wins!"
     else if (scoreComputer < scoreUser) finalWinner= "You win!"
     else finalWinner = "Draw!"
-    
-    finalTally.style.display = "flex"
-    finalTally.textContent = finalWinner
-}
 
-// A rock beats scissors, scissors beat paper by cutting it, and paper beats rock by covering it.
+    alert("Game has ended. Refresh page to try again!")
+    
+    /* finalTally.style.display = "flex"
+    finalTally.textContent = finalWinner */
+}

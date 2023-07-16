@@ -30,6 +30,14 @@ body {
     padding-bottom: 10px;
 }
 
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    background: transparent;
+}
+
 .btn {
     border-radius: 8px;
     border-color: black;
