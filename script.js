@@ -4,7 +4,7 @@ const scissorsBtn = document.getElementById('scissorsBtn')
 
 const userTally = document.getElementById('userTally')
 const computerTally = document.getElementById('computerTally')
-const finalTally = document.getElementById('finalTally') // finalTally.hidden = true initally. I have set display= none 
+const finalTally = document.getElementById('finalTally')
 
 let scoreUser = 0
 let scoreComputer = 0
@@ -86,6 +86,8 @@ function updateScoreTally (thisWinner) {
     } else if(thisWinner === "You Win!") {
         ++scoreUser
         userTally.textContent = `Player: ${scoreUser}`
+    } else if (thisWinner === "Draw!") {
+        alert("This turn was a draw.")
     }
     if (numberOfPlays === 5) declareWinner()
 }
@@ -94,9 +96,12 @@ function declareWinner() {
     if (scoreComputer > scoreUser) finalWinner= "Computer Wins!"
     else if (scoreComputer < scoreUser) finalWinner= "You win!"
     else finalWinner = "Draw!"
+ 
+    finalTally.style.display = "flex"
+    finalTally.style.borderRadius = "8px"
+    finalTally.style.border = "1px solid black"
+    finalTally.style.padding = "10px"
+    finalTally.textContent = finalWinner
 
     alert("Game has ended. Refresh page to try again!")
-    
-    /* finalTally.style.display = "flex"
-    finalTally.textContent = finalWinner */
 }
