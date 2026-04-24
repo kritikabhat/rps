@@ -1,4 +1,14 @@
-const computerTally = document.getElementById('computerTally')
+function getComputerChoice () {
+    let randomNumber = Math.random() * 10
+    if(randomNumber <=3) return "Rock"
+        else if (randomNumber > 3 && randomNumber <= 6.5)
+            return "Paper"
+        else return "Scissors"
+}
+
+console.log(getComputerChoice())
+
+/* const computerTally = document.getElementById('computerTally')
 const finalTally = document.getElementById('finalTally')
 const paperBtn = document.getElementById('paperBtn')
 const rockBtn = document.getElementById('rockBtn')
@@ -113,3 +123,4 @@ function declareWinner(scoreComputer, scoreUser) {
     showFinalTally(finalWinner)
     alert("Game has ended. Refresh page to try again!")
 }
+*/
