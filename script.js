@@ -14,19 +14,15 @@ function getHumanChoice () {
     return prompt("Pick one!")
 }
 
-let computerChoice = getComputerChoice()
-let humanChoice = getHumanChoice().toUpperCase()
+function playRound () {
+    let humanChoice = getHumanChoice().toUpperCase()
+    let computerChoice = getComputerChoice()
 
-
-function playRound (humanChoice, computerChoice) {
     console.log("You Pick: " + humanChoice)
     console.log("Computer Picks: " + computerChoice)
     let didPCWin = true // assume PC wins
 
-    if (humanChoice === computerChoice) {
-        console.log("Draw!")
-        return
-    }
+    if (humanChoice === computerChoice) return
 
     if (humanChoice === "ROCK" && computerChoice === "SCISSORS") 
         didPCWin = false
@@ -35,14 +31,19 @@ function playRound (humanChoice, computerChoice) {
     if (humanChoice === "SCISSORS" && computerChoice === "PAPER")
         didPCWin = false
 
-    if (didPCWin) {
-        console.log("PC wins!")
-        ++computerScore
-    } else {
-        console.log("You win!")
-        ++humanScore
-    }
+    if (didPCWin) ++computerScore
+    else ++humanScore
 }
 
-playRound(humanChoice, computerChoice)
-console.log("Current scores:\nHuman: " + humanScore + " PC: " + computerScore)
+function playGame () {
+    for (let i = 0; i < 5; i ++) {
+        playRound()
+        console.log("Current scores:\nHuman: " + humanScore + " PC: " + computerScore)
+    }
+
+    (humanScore > computerScore) ? console.log("You Won!")
+        : (computerScore > humanScore) ? console.log("PC Won!")
+        : console.log("Draw!")
+}
+
+playGame()
