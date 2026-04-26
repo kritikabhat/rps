@@ -30,9 +30,8 @@ gameSection.addEventListener('click', (e) => {
 
     if (e.target.tagName === 'BUTTON') {
         ++numberOfRounds
-        humanChoice = e.target.textContent.toUpperCase()
+        humanChoice = e.target.textContent.slice(3).toUpperCase()
         playRound(humanChoice)
-        console.log("Current scores:\nHuman: " + humanScore + " PC: " + computerScore)
 
         numberOfRoundsElement.textContent = numberOfRounds
         currentRound.querySelector('#rounds').appendChild(numberOfRoundsElement)
@@ -94,13 +93,6 @@ function pickWinner () {
         }).then(() => jsConfetti.addConfetti())
     }
     else {
-        alter("Draw!")
+        alert("This time, it is a draw! Refresh page to try again!")
     }
 }
-
-
-/**
- * 
- * add at the end, optionally
- *   Trivia: Did you know that the popular band, BTS is the official brand ambassadors of Rock, Paper, Scissors!
- */
