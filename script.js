@@ -42,7 +42,10 @@ function playRound (humanChoice) {
 
     let didPCWin = true // assume PC wins
 
-    if (humanChoice === computerChoice) return
+    if (humanChoice === computerChoice) {
+        alert(`Both picked ${humanChoice}, this round was a Draw!`)
+        return
+    }
 
     if (humanChoice === "ROCK" && computerChoice === "SCISSORS") 
         didPCWin = false
@@ -51,8 +54,15 @@ function playRound (humanChoice) {
     if (humanChoice === "SCISSORS" && computerChoice === "PAPER")
         didPCWin = false
 
-    if (didPCWin) ++computerScore
-    else ++humanScore
+    if (didPCWin) {
+        ++computerScore
+        alert(`Computer picked ${computerChoice}, they won this round!`)
+    }
+    else {
+        ++humanScore
+        alert(`Computer picked ${computerChoice}, you won this round!`)
+    }
+
 
     computerScoreElement.textContent = computerScore
     humanScoreElement.textContent = humanScore
@@ -62,19 +72,15 @@ function playRound (humanChoice) {
 }
 
 function pickWinner () {
-    (humanScore > computerScore) ? console.log("You Won!")
-    : (computerScore > humanScore) ? console.log("PC Won!")
-    : console.log("Draw!")
+    (humanScore > computerScore) ? alert("You Won!")
+    : (computerScore > humanScore) ? alert("PC Won!")
+    : alter("Draw!")
 }
 
 /**
- * After each round, use altert to tell who won
- * Update score in the "current scores" section
- * To show final scores, add a new div
  * 
  * Add some type of effects to show which button was selected by the user
  * 
  * add at the end, optionally
- *             Trivia: Did you know that the popular band, BTS is the official
-            brand ambassadors of Rock, Paper, Scissors!
+ *   Trivia: Did you know that the popular band, BTS is the official brand ambassadors of Rock, Paper, Scissors!
  */

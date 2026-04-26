@@ -36,3 +36,9 @@ button {
 hr {
     width: 100%;
 }
+
+.currentRound, .scoreSection {
+    border: 2px solid black;
+    padding: 1.5em 5em;
+    text-align: left;
+}
