@@ -1,115 +1,101 @@
-const computerTally = document.getElementById('computerTally')
-const finalTally = document.getElementById('finalTally')
-const paperBtn = document.getElementById('paperBtn')
-const rockBtn = document.getElementById('rockBtn')
-const roundWon = document.getElementById('roundWon')
-const scissorsBtn = document.getElementById('scissorsBtn')
-const userTally = document.getElementById('userTally')
+const gameSection = document.querySelector('.gameSection')
+const scoreSection = document.querySelector('.scoreSection')
+const currentRound = document.querySelector('.currentRound')
 
-let computerChoice = ""
-let finalWinner = ""
-let scoreComputer = 0
-let scoreUser = 0
+let numberOfRoundsElement = document.createElement('span')
+let computerChoiceElement = document.createElement('span')
+let humanChoiceElement = document.createElement('span')
+let humanScoreElement = document.createElement('span')
+let computerScoreElement = document.createElement('span')
 
-function randomChoice () {
-    let choices = ["Rock", "Paper", "Scissors"]
-    return choices[Math.floor(Math.random()*choices.length)]
+const jsConfetti = new JSConfetti()
+let humanScore = 0
+let computerScore = 0
+let humanChoice = ""
+let numberOfRounds = 0
+
+function getComputerChoice () {
+    let randomNumber = Math.random() * 10
+    if(randomNumber <=3) return "ROCK"
+        else if (randomNumber > 3 && randomNumber <= 6.5)
+            return "PAPER"
+        else return "SCISSORS"
 }
 
-function playRound (userChoice, computerChoice) {
-    let roundWinner, winningChoice
-    if (String(userChoice).toUpperCase() === "ROCK") {
-        switch(String(computerChoice).toUpperCase()) {
-            case "ROCK": 
-                roundWinner = "Draw!"
-                winningChoice = "Draw"
-                break; 
-            case "PAPER": 
-                roundWinner = "You Lose!"
-                winningChoice = "Paper Won"
-                break; 
-            case "SCISSORS": 
-                roundWinner = "You Win!"
-                winningChoice = "Rock Won"
-                break; 
-        }
-    } else if (String(userChoice).toUpperCase() === "PAPER") {
-        switch(String(computerChoice).toUpperCase()) {
-            case "PAPER": 
-                roundWinner = "Draw!"
-                winningChoice = "Draw"
-                break; 
-            case "ROCK": 
-                roundWinner = "You Win!"
-                winningChoice = "Paper Won"
-                break; 
-            case "SCISSORS": 
-                roundWinner = "You Lose!"
-                winningChoice = "Scissors Won"
-                break; 
-        }
-    } else {
-        switch(String(computerChoice).toUpperCase()) {
-            case "SCISSORS": 
-                roundWinner = "Draw!"
-                winningChoice = "Draw"
-                break; 
-            case "PAPER": 
-                roundWinner = "You Win!"
-                winningChoice = "Scissors Won"
-                break; 
-            case "ROCK": 
-                roundWinner = "Rock Won"
-                break; 
-        }
+gameSection.addEventListener('click', (e) => {
+    if (numberOfRounds > 5) {
+        e.target.disabled = true
+        alert("Please refresh page to play again!")
+        return
     }
-    return { roundWinner, winningChoice }
-}
 
-paperBtn.addEventListener('click', () => startPlayOnClick('paper'))
-rockBtn.addEventListener('click', () => startPlayOnClick('rock'))
-scissorsBtn.addEventListener('click', () => startPlayOnClick('scissors'))
+    if (e.target.tagName === 'BUTTON') {
+        ++numberOfRounds
+        humanChoice = e.target.textContent.slice(3).trim().toUpperCase()
+        playRound(humanChoice)
 
-function startPlayOnClick (userChoice) {
-    computerChoice = randomChoice()
-    let { roundWinner, winningChoice} = playRound(userChoice, computerChoice)
-    updateScoreTally(roundWinner)
-    showRoundWinner(winningChoice)
-}
-
-function showRoundWinner(winningChoice) {
-    if (winningChoice === undefined || winningChoice === null) return
-    roundWon.style.border = "1px solid black"
-    roundWon.style.borderRadius = "8px"
-    roundWon.style.display = "flex"
-    roundWon.style.padding = "10px"
-    roundWon.textContent = winningChoice
-}
-
-function showFinalTally(finalWinner) {
-    finalTally.style.border = "1px solid black"
-    finalTally.style.borderRadius = "8px"
-    finalTally.style.display = "flex"
-    finalTally.style.padding = "10px"
-    finalTally.textContent = finalWinner
-}
-
-function updateScoreTally (roundWinner) {
-    if (roundWinner === "You Lose!") {
-        ++scoreComputer
-        computerTally.textContent = `Computer: ${scoreComputer}`
-    } else if(roundWinner === "You Win!") {
-        ++scoreUser
-        userTally.textContent = `Player: ${scoreUser}`
+        numberOfRoundsElement.textContent = numberOfRounds
+        currentRound.querySelector('#rounds').appendChild(numberOfRoundsElement)
     }
-    if (scoreComputer === 5 || scoreUser === 5) {
-        declareWinner(scoreComputer, scoreUser)
+    if (numberOfRounds === 5) {
+        pickWinner()
+        ++numberOfRounds
     }
+})
+
+function playRound (humanChoice) {
+    let computerChoice = getComputerChoice()
+
+    computerChoiceElement.textContent = computerChoice
+    humanChoiceElement.textContent = humanChoice
+    currentRound.querySelector('#computerPick').appendChild(computerChoiceElement)
+    currentRound.querySelector('#humanPicked').appendChild(humanChoiceElement)
+
+    // if we assume this, we only need to check condition where PC loses
+    let didPCWin = true
+
+    if (humanChoice === computerChoice) {
+        alert(`Both picked ${humanChoice}, this round was a Draw!`)
+        return
+    }
+
+    if (humanChoice === "ROCK" && computerChoice === "SCISSORS") 
+        didPCWin = false
+    if (humanChoice === "PAPER" && computerChoice === "ROCK")
+        didPCWin = false
+    if (humanChoice === "SCISSORS" && computerChoice === "PAPER")
+        didPCWin = false
+
+    if (didPCWin) {
+        ++computerScore
+        alert(`Computer picked ${computerChoice}, they won this round!`)
+    }
+    else {
+        ++humanScore
+        alert(`Computer picked ${computerChoice}, you won this round!`)
+    }
+
+    computerScoreElement.textContent = computerScore
+    humanScoreElement.textContent = humanScore
+    scoreSection.querySelector('#computerScore').appendChild(computerScoreElement)
+    scoreSection.querySelector('#humanScore').appendChild(humanScoreElement)
+    
 }
 
-function declareWinner(scoreComputer, scoreUser) {
-    if (scoreComputer > scoreUser) finalWinner = "Computer Wins!"
-    else finalWinner= "You win!"
-    showFinalTally(finalWinner)
-    alert("Game has ended. Refresh page to try again!")
+function pickWinner () {
+    if (humanScore > computerScore) {
+        alert("You Won!")
+        jsConfetti.addConfetti({
+            emojis: ['🌈', '🎉', '🎈', '✨', '🍬', '🌸'],
+        }).then(() => jsConfetti.addConfetti())
+    }
+    else if (computerScore > humanScore) {
+        alert("PC Won!")
+        jsConfetti.addConfetti({
+            emojis: ['✌️', '👊', '✋'],
+        }).then(() => jsConfetti.addConfetti())
+    }
+    else {
+        alert("This time, it is a draw! Refresh page to try again!")
+    }
 }

@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="author" content="Me">
-        <meta name="description" content="Game game game">
+        <meta name="author" content="Kritika">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Rock, Paper, Scissors!">
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
-        <title>Game Boring</title>
+        <title>Rock, Paper, Scissors!</title>
     </head>
     <body>
-        <h1 id="myHeading">Rock, Paper, Scissors</h1>
-        <div class="intro">
-            <h2>Ready? Select an option below to play!</h2>
-            <h3>Whoever wins five rounds, wins the game.</h3>
-        </div>  
-        <div id="roundWon"></div>  
-        <div class="buttons">
-            <button class="btn" id="rockBtn">
-                <div class="icon">✊ Rock</div>
-            </button>
-            <button class="btn" id="paperBtn">
-                <div class="icon">✋ Paper</div>
-            </button>
-            <button class="btn" id="scissorsBtn">
-                <div class="icon">✌️ Scissors</div>
-            </button>
+        <h1>Rock, Paper, Scissors<hr></h1>
+        <p>Ready? Select an option below to play! We will play five rounds!</p>
+        <section class="gameSection">
+            <button>👊 Rock</button>
+            <button>🖐️ Paper</button>
+            <button>✌️ Scissors</button>
+        </section>
+        <hr>
+        <div><em>
+            Trivia: Did you know that the popular band, 
+            <a href="https://www.youtube.com/watch?v=RbctNBlXBJc" target="_blank">BTS</a> is the official brand ambassador of the
+             game, "Rock, Paper, Scissors"?</em>
         </div>
-        <div class="tally">
-            <div id="userTally">Player: </div>
-            <div id="computerTally">Computer: </div>
+        <div class ="currentRound">
+            <div id="rounds">
+                <span>Round: </span>
+            </div>
+            <div id="computerPick">
+                <span>Computer Picked: </span>
+            </div>
+            <div id="humanPicked">
+                <span>You Picked: </span>
+            </div>
         </div>
-        <div>
-            <div id="finalTally">Result: </div>
-        </div>
+        <section class="scoreSection">
+            <h3><u>Current Scores</u></h3>
+            <div>
+                <div id="computerScore">
+                    <span>Computer: </span>
+                </div>
+                <div id="humanScore">
+                    <span>You: </span>
+                </div>
+            </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

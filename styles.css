@@ -1,94 +1,50 @@
+* {
+    box-sizing: border-box;
+    margin: 0 0 0 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 body {
     background-color: whitesmoke;
-    color: black;
-}
-
-#myHeading {
-    border-bottom: 3px solid;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    margin-left: 30%;
-    margin-right: 30%;
-    padding: 10px;
-    text-align: center;
-}
-
-.intro {
-    font-family: 'Courier New', Courier, monospace;
-    margin-bottom: 100px;
-    margin-top: 50px;
-    text-align: center;
-}
-
-.buttons {
-    border-bottom: 2px solid black;
     display: flex;
-    justify-content: space-around;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    flex-direction: column;
+    gap: 1em;
+    align-items:center;
+    padding: 2em;
+    text-align: center;
+}
+
+body p {
+    font-weight: bolder;
+    margin-bottom: 1em;
 }
 
 button {
-    background-color:azure;
-    cursor: pointer;
+    border-radius: 10px;
+    background-color: #3882f6;
+    padding: 0.5em;
+    width: 7em;
+    color: #f9faf8;
+    border-color: #f9faf8;
+    margin: 0.5em;
+    
 }
 
 button:hover {
-    background: transparent;
+    opacity: 0.8;
+    color: black;
 }
 
-.btn {
-    border-color: black;
-    border-radius: 8px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    height: 70px;
-    margin-top: 10px;
-    width: 170px;
+.scoreSection {
+    margin-top: 1em;
 }
 
-.icon {
-    font-size: 30px;
+hr {
+    width: 100%;
 }
 
-.tally {
-    background-color: azure;
-    border: 1px solid black;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
-    font-size: 30px;
-    gap: 20%;
-    justify-content: space-evenly;
-    margin-top: 70px;
-    margin-left: 32%;
-    margin-right: 30%;
-    padding: 10px;
-}
-
-#roundWon {
-    background-color: azure;
-    display: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 30px;
-    font-weight: bolder;
-    justify-content: center;
-    margin-left: 32%;
-    margin-right: 30%;
-    margin-top: 70px;    
-}
-
-#finalTally {
-    background-color: azure;
-    display: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 30px;
-    font-weight: bolder;
-    justify-content:center;
-    margin-left:32%;
-    margin-right: 30%;
-    margin-top: 40px;
+.currentRound, .scoreSection {
+    border: 2px solid black;
+    padding: 1.5em 5em;
+    text-align: left;
 }
