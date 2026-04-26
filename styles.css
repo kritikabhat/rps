@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0 0 0 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items:center;
+    padding: 2em;
+    text-align: center;
+}
+
+body p {
+    font-weight: bolder;
+    margin-bottom: 1em;
+}
+
+button {
+    border-radius: 10px;
+    background-color: #3882f6;
+    padding: 0.5em;
+    width: 7em;
+    color: #f9faf8;
+    border-color: #f9faf8;
+    margin: 0.5em;
+}
+
+.scoreSection {
+    margin-top: 1em;
+}
+
+hr {
+    width: 100%;
+}
