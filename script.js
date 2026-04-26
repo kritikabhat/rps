@@ -4,6 +4,7 @@ const currentRound = document.querySelector('.currentRound')
 
 let numberOfRoundsElement = document.createElement('span')
 let computerChoiceElement = document.createElement('span')
+let humanChoiceElement = document.createElement('span')
 let humanScoreElement = document.createElement('span')
 let computerScoreElement = document.createElement('span')
 
@@ -30,7 +31,7 @@ gameSection.addEventListener('click', (e) => {
 
     if (e.target.tagName === 'BUTTON') {
         ++numberOfRounds
-        humanChoice = e.target.textContent.slice(3).toUpperCase()
+        humanChoice = e.target.textContent.slice(3).trim().toUpperCase()
         playRound(humanChoice)
 
         numberOfRoundsElement.textContent = numberOfRounds
@@ -46,7 +47,9 @@ function playRound (humanChoice) {
     let computerChoice = getComputerChoice()
 
     computerChoiceElement.textContent = computerChoice
+    humanChoiceElement.textContent = humanChoice
     currentRound.querySelector('#computerPick').appendChild(computerChoiceElement)
+    currentRound.querySelector('#humanPicked').appendChild(humanChoiceElement)
 
     // if we assume this, we only need to check condition where PC loses
     let didPCWin = true
