@@ -27,6 +27,12 @@ button {
     color: #f9faf8;
     border-color: #f9faf8;
     margin: 0.5em;
+    
+}
+
+button:hover {
+    opacity: 0.8;
+    color: black;
 }
 
 .scoreSection {

@@ -7,6 +7,7 @@ let computerChoiceElement = document.createElement('span')
 let humanScoreElement = document.createElement('span')
 let computerScoreElement = document.createElement('span')
 
+const jsConfetti = new JSConfetti()
 let humanScore = 0
 let computerScore = 0
 let humanChoice = ""
@@ -21,6 +22,12 @@ function getComputerChoice () {
 }
 
 gameSection.addEventListener('click', (e) => {
+    if (numberOfRounds > 5) {
+        e.target.disabled = true
+        alert("Please refresh page to play again!")
+        return
+    }
+
     if (e.target.tagName === 'BUTTON') {
         ++numberOfRounds
         humanChoice = e.target.textContent.toUpperCase()
@@ -30,8 +37,10 @@ gameSection.addEventListener('click', (e) => {
         numberOfRoundsElement.textContent = numberOfRounds
         currentRound.querySelector('#rounds').appendChild(numberOfRoundsElement)
     }
-    if (numberOfRounds === 5) // You also need buttons to stop responding & option to  reset the page after 5 rounds
+    if (numberOfRounds === 5) {
         pickWinner()
+        ++numberOfRounds
+    }
 })
 
 function playRound (humanChoice) {
@@ -40,7 +49,8 @@ function playRound (humanChoice) {
     computerChoiceElement.textContent = computerChoice
     currentRound.querySelector('#computerPick').appendChild(computerChoiceElement)
 
-    let didPCWin = true // assume PC wins
+    // if we assume this, we only need to check condition where PC loses
+    let didPCWin = true
 
     if (humanChoice === computerChoice) {
         alert(`Both picked ${humanChoice}, this round was a Draw!`)
@@ -63,7 +73,6 @@ function playRound (humanChoice) {
         alert(`Computer picked ${computerChoice}, you won this round!`)
     }
 
-
     computerScoreElement.textContent = computerScore
     humanScoreElement.textContent = humanScore
     scoreSection.querySelector('#computerScore').appendChild(computerScoreElement)
@@ -72,14 +81,25 @@ function playRound (humanChoice) {
 }
 
 function pickWinner () {
-    (humanScore > computerScore) ? alert("You Won!")
-    : (computerScore > humanScore) ? alert("PC Won!")
-    : alter("Draw!")
+    if (humanScore > computerScore) {
+        alert("You Won!")
+        jsConfetti.addConfetti({
+            emojis: ['🌈', '🎉', '🎈', '✨', '🍬', '🌸'],
+        }).then(() => jsConfetti.addConfetti())
+    }
+    else if (computerScore > humanScore) {
+        alert("PC Won!")
+        jsConfetti.addConfetti({
+            emojis: ['✌️', '👊', '✋'],
+        }).then(() => jsConfetti.addConfetti())
+    }
+    else {
+        alter("Draw!")
+    }
 }
 
+
 /**
- * 
- * Add some type of effects to show which button was selected by the user
  * 
  * add at the end, optionally
  *   Trivia: Did you know that the popular band, BTS is the official brand ambassadors of Rock, Paper, Scissors!
