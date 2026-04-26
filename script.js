@@ -1,4 +1,12 @@
 const gameSection = document.querySelector('.gameSection')
+const scoreSection = document.querySelector('.scoreSection')
+const currentRound = document.querySelector('.currentRound')
+
+let numberOfRoundsElement = document.createElement('span')
+let computerChoiceElement = document.createElement('span')
+let humanScoreElement = document.createElement('span')
+let computerScoreElement = document.createElement('span')
+
 let humanScore = 0
 let computerScore = 0
 let humanChoice = ""
@@ -18,17 +26,19 @@ gameSection.addEventListener('click', (e) => {
         humanChoice = e.target.textContent.toUpperCase()
         playRound(humanChoice)
         console.log("Current scores:\nHuman: " + humanScore + " PC: " + computerScore)
-    }
 
-    if (numberOfRounds === 5)
+        numberOfRoundsElement.textContent = numberOfRounds
+        currentRound.querySelector('#rounds').appendChild(numberOfRoundsElement)
+    }
+    if (numberOfRounds === 5) // You also need buttons to stop responding & option to  reset the page after 5 rounds
         pickWinner()
 })
 
 function playRound (humanChoice) {
     let computerChoice = getComputerChoice()
 
-    // Need to show the computer choice and number of rounds on a line
-    // console.log("Computer Picks: " + computerChoice)
+    computerChoiceElement.textContent = computerChoice
+    currentRound.querySelector('#computerPick').appendChild(computerChoiceElement)
 
     let didPCWin = true // assume PC wins
 
@@ -43,6 +53,12 @@ function playRound (humanChoice) {
 
     if (didPCWin) ++computerScore
     else ++humanScore
+
+    computerScoreElement.textContent = computerScore
+    humanScoreElement.textContent = humanScore
+    scoreSection.querySelector('#computerScore').appendChild(computerScoreElement)
+    scoreSection.querySelector('#humanScore').appendChild(humanScoreElement)
+    
 }
 
 function pickWinner () {
